@@ -1,8 +1,11 @@
 <?php
+# Bild-Organizer für Uploads – Tägliche automatische Verzeichnisstruktur für Webcams und FTP-Uploads mit PHP
 # image_organizer.php
-# V 25.01.004
+# V 25.01.005
 # Du kannst die Funktion in anderen Skripten aufrufen, z.B.:
 # include 'image_organizer.php';
+
+date_default_timezone_set('Europe/Berlin');  // Zeitzone explizit setzen
 
 $watchDir = __DIR__ . '/images';  // Ordner, der überwacht wird
 $fileExtension = 'jpg';  // Zu überwachende Dateiendung
