@@ -1,4 +1,4 @@
-# Bild-Organizer für Uploads – Tägliche automatische Verzeichnisstruktur für Webcams und FTP-Uploads mit PHP
+# Bild-Organizer für Uploads – Tägliche automatische Verzeichnisstruktur für Webcams
 
 Ein großer Vorteil von INSTAR-Webcams ist, dass sie ohne Cloud-Anbindung funktionieren (optional verfügbar) und MQTT-Verbindungen für SmartHome bieten.
 
