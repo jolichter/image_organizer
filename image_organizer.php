@@ -1,5 +1,5 @@
 <?php
-# Bild-Organizer für Uploads – Tägliche automatische Verzeichnisstruktur für Webcams und FTP-Uploads mit PHP
+# Bild-Organizer für Uploads – Tägliche automatische Verzeichnisstruktur für Webcams
 # image_organizer.php
 # V 25.01.005
 # Du kannst die Funktion in anderen Skripten aufrufen, z.B.:
