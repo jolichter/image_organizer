@@ -6,8 +6,20 @@ Am 01.01.2025 um 00:00 Uhr trat der INSTAR Neujahrs-Bug auf ([LINK](https://foru
 
 Der Fehler wurde schnell behoben, brachte mich aber auf die Idee, die Ordnerstruktur individuell anzupassen, da INSTAR hierfür keine Konfigurationsoption bietet.
 
-Das PHP-Skript organisiert automatisch Bilder in einem überwachten Ordner. Beim Aufruf prüft es einen Pfad (z.B. `/images`) auf neue `.jpg`-Dateien. Gefundene Bilder werden in Tagesordner (`YYYY-MM-DD`) verschoben, optional mit zusätzlichem Unterordner (z.B. `/fotos`).
+## Kurzbeschreibung des Codes
+Dieses PHP-Skript organisiert automatisch Bilddateien in einem überwachten Ordner (z.B. `/images`) und sortiert sie nach dem Erstellungsdatum in Tagesunterordner (Format `YYYY-MM-DD`).
 
-Nicht vorhandene Verzeichnisse werden automatisch erstellt. Fehlerprotokolle bei Problemen werden ins Error-Log geschrieben (standardmäßig unter `/var/log/php_errors.log` oder im logs-Verzeichnis der jeweiligen Domain unter Plesk).
+## Funktionsweise
+Verzeichnisscan: Das Skript durchsucht einen definierten Ordner (`/images`) nach Dateien mit bestimmten Endungen (`jpg`, `jpeg`).
 
-Das Skript kann eigenständig ausgeführt, per Cronjob automatisiert oder – meine bevorzugte Lösung – in andere PHP-Skripte (z.B. eine Bildergalerie) eingebunden werden.
+## Sortierung
+Gefundene Dateien werden anhand ihres Erstellungsdatums in einen entsprechenden Tagesordner verschoben.
+
+## Fehlermanagement
+Falls das Zielverzeichnis nicht existiert, wird es automatisch erstellt. Fehler beim Verschieben oder Zugriff auf Verzeichnisse können optional in das PHP-Error-Log geschrieben werden (standardmäßig unter `/var/log/php_errors.log` oder im logs-Verzeichnis der jeweiligen Domain unter Plesk).
+
+## Flexibilität
+Unterstützt mehrere Dateiformate durch ein Array ($fileExtensions).
+Die Dateiendungsprüfung ist case-insensitive (`jpg`, `JPG`, `png` usw.).
+Optional kann innerhalb der Tagesordner ein zusätzlicher Unterordner (z.B. `/fotos`) erstellt werden.
+Das Skript kann eigenständig ausgeführt, per Cronjob automatisiert oder – meine bevorzugte Lösung – in andere PHP-Projekte (z.B. eine Bildergalerie) eingebunden werden.
