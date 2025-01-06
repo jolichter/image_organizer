@@ -44,7 +44,7 @@ Das Skript durchsucht einen definierten Ordner (`/images`) nach Dateien mit best
   Das Skript überwacht die Anzahl der Dateien im definierten Verzeichnis.  
   Sobald die maximale Anzahl von **5000 Dateien** (`$maxLimit`) erreicht wird, stoppt das Skript und zeigt eine HTML-Benachrichtigung an.  
   Neue Dateien werden erst verarbeitet, wenn alte Dateien entfernt oder verschoben werden.  
-- **Rennbedingungsschutz bei Verzeichnissen:**  
+- **Race Condition Protection bei Verzeichnissen:**  
   Wenn das Verzeichnis während der Erstellung (`mkdir`) von einem anderen Prozess erstellt wird, verhindert eine zweite `is_dir`-Prüfung unnötige Abbrüche.  
 - **Effiziente Dateioperationen:**  
   `rename()` wird verwendet, da es die schnellste Möglichkeit ist, Dateien innerhalb desselben Dateisystems zu verschieben (es wird nur der Pfad geändert).  
