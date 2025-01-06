@@ -1,4 +1,4 @@
-# Bild-Organizer für Uploads – Tägliche automatische Verzeichnisstruktur für Webcams
+# Bild-Organizer für Uploads – Automatische Verzeichnisstruktur mit PHP  
 
 Ein großer Vorteil von INSTAR-Webcams ist, dass sie ohne Cloud-Anbindung funktionieren (optional verfügbar) und MQTT-Verbindungen für SmartHome bieten.
 
@@ -6,20 +6,41 @@ Am 01.01.2025 um 00:00 Uhr trat der INSTAR Neujahrs-Bug auf ([LINK](https://foru
 
 Der Fehler wurde schnell behoben, brachte mich aber auf die Idee, die Ordnerstruktur individuell anzupassen, da INSTAR hierfür keine Konfigurationsoption bietet.
 
-## Kurzbeschreibung des Codes
-Dieses PHP-Skript organisiert automatisch Bilddateien in einem überwachten Ordner (z.B. `/images`) und sortiert sie nach dem Erstellungsdatum in Tagesunterordner (Format `YYYY-MM-DD`).
+---
 
-## Funktionsweise
-Verzeichnisscan: Das Skript durchsucht einen definierten Ordner (`/images`) nach Dateien mit bestimmten Endungen (`jpg`, `jpeg`).
+## Kurzbeschreibung des Codes  
+Dieses PHP-Skript organisiert automatisch Bilddateien in einem überwachten Ordner (z.B. `/images`) und sortiert sie nach ihrem Erstellungsdatum in Tagesunterordner (Format `YYYY-MM-DD`). Es unterstützt mehrere Dateiformate und ist flexibel anpassbar.  
 
-## Sortierung
-Gefundene Dateien werden anhand ihres Erstellungsdatums in einen entsprechenden Tagesordner verschoben.
+## Funktionsweise  
+### Verzeichnisscan  
+Das Skript durchsucht einen definierten Ordner (`/images`) nach Dateien mit bestimmten Endungen (`jpg`, `jpeg`). Gefundene Dateien werden basierend auf ihrem Erstellungsdatum in passende Tagesunterverzeichnisse verschoben.  
 
-## Fehlermanagement
-Falls das Zielverzeichnis nicht existiert, wird es automatisch erstellt. Fehler beim Verschieben oder Zugriff auf Verzeichnisse können optional in das PHP-Error-Log geschrieben werden (standardmäßig unter `/var/log/php_errors.log` oder im logs-Verzeichnis der jeweiligen Domain unter Plesk).
+## Sortierung und Strukturierung  
+- **Automatische Tagesordner-Erstellung:**  
+  Bilder werden in Unterordner im Format `YYYY-MM-DD` sortiert.  
+- **Optionaler Subfolder:**  
+  Innerhalb der Tagesordner kann optional ein zusätzlicher Unterordner (z.B. `/fotos`) erstellt werden.  
 
-## Flexibilität
-Unterstützt mehrere Dateiformate durch ein Array ($fileExtensions).
-Die Dateiendungsprüfung ist case-insensitive (`jpg`, `JPG`, `png` usw.).
-Optional kann innerhalb der Tagesordner ein zusätzlicher Unterordner (z.B. `/fotos`) erstellt werden.
-Das Skript kann eigenständig ausgeführt, per Cronjob automatisiert oder – meine bevorzugte Lösung – in andere PHP-Projekte (z.B. eine Bildergalerie) eingebunden werden.
+## Fehlermanagement  
+- **Automatische Verzeichniserstellung:**  
+  Falls das Zielverzeichnis nicht existiert, wird es automatisch erstellt.  
+- **Logging von Fehlern und Erfolgen:**  
+  Fehler beim Erstellen von Verzeichnissen oder beim Verschieben von Dateien werden (optional) in das PHP-Error-Log geschrieben. Erfolgreiche Datei-Verschiebungen werden ebenfalls protokolliert, sofern das Logging aktiviert ist.  
+- **Log-Speicherorte:**  
+  Standardmäßig unter `/var/log/php_errors.log` oder im `logs`-Verzeichnis der jeweiligen Domain (bei Plesk-Umgebungen).  
+
+## Optimierungen und zusätzliche Funktionen  
+- **Maximale Dateiverarbeitung pro Lauf:**  
+  Das Skript verarbeitet maximal **1000 Dateien pro Ausführung** (`$maxFilesPerRun`). Falls mehr Dateien im Verzeichnis vorhanden sind, wird die Verarbeitung beim nächsten Aufruf fortgesetzt.  
+- **Doppelte Dateiprüfung entfernt:**  
+  Die Dateiendungsprüfung erfolgt nur noch in der `scanDirectory`-Funktion, wodurch doppelte Prüfungen vermieden werden.  
+- **Effiziente Aktualisierung:**  
+  Das Array `$lastScan` wird nur dann aktualisiert, wenn tatsächlich Dateien verarbeitet wurden, was die Performance verbessert.  
+- **Verzeichnisprüfung beim Start:**  
+  Der Hauptüberwachungsordner (`$watchDir`) wird zu Beginn des Skripts erstellt, falls er nicht existiert, um sicherzustellen, dass die Überwachung fehlerfrei starten kann.  
+
+## Flexibilität und Erweiterbarkeit  
+- **Mehrere Dateiformate unterstützt:**  
+  Die zu verarbeitenden Dateiformate können in einem Array (`$fileExtensions`) definiert werden (`jpg`, `jpeg` usw.). Die Prüfung ist **case-insensitive** (`jpg`, `JPG`).  
+- **Einfache Integration:**  
+  Das Skript kann eigenständig ausgeführt, per Cronjob automatisiert oder in bestehende PHP-Projekte integriert werden (z.B. Bildergalerien oder FTP-Verwaltungssysteme).  
