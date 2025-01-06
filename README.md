@@ -31,7 +31,7 @@ Das Skript durchsucht einen definierten Ordner (`/images`) nach Dateien mit best
 
 ## Optimierungen und zusätzliche Funktionen  
 - **Maximale Dateiverarbeitung pro Lauf:**  
-  Das Skript verarbeitet maximal **1000 Dateien pro Ausführung** (`$maxFilesPerRun`). Falls mehr Dateien im Verzeichnis vorhanden sind, wird die Verarbeitung beim nächsten Aufruf fortgesetzt.  
+  Das Skript verarbeitet maximal **5000 Dateien pro Ausführung** (`$maxFilesPerRun`). Falls mehr Dateien im Verzeichnis vorhanden sind, wird die Verarbeitung beim nächsten Aufruf fortgesetzt.  
 - **Doppelte Dateiprüfung entfernt:**  
   Die Dateiendungsprüfung erfolgt nur noch in der `scanDirectory`-Funktion, wodurch doppelte Prüfungen vermieden werden.  
 - **Effiziente Aktualisierung:**  
