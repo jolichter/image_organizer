@@ -19,7 +19,7 @@ Das Skript durchsucht einen definierten Ordner (`/images`) nach Dateien mit best
 - **Automatische Tagesordner-Erstellung:**  
   Bilder werden in Unterordner im Format `YYYY-MM-DD` sortiert.  
 - **Optionaler Subfolder:**  
-  Innerhalb der Tagesordner kann optional ein zusätzlicher Unterordner (z.B. `/fotos`) erstellt werden.  
+  Innerhalb der Tagesordner kann optional ein zusätzlicher Unterordner (z.B. `/YYYY-MM-DD/fotos`) erstellt werden.  
 
 ## Fehlermanagement  
 - **Automatische Verzeichniserstellung:**  
